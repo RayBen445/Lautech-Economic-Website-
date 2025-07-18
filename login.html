@@ -1,18 +1,23 @@
-<!-- login.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Login - LAUTECH Economics</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/matric-numbers.js" defer></script>
-  <script src="js/auth.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | LAUTECH Economics</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login to Department Portal</h2>
-    <input type="text" id="matricInput" placeholder="Enter your Matric Number">
-    <button onclick="login()">Login</button>
-    <p id="error" style="color:red"></p>
-  </div>
+  <main class="login-container">
+    <h1>Student Login</h1>
+    <form id="loginForm">
+      <label for="matric">Enter Matric Number:</label>
+      <input type="text" id="matric" name="matric" required placeholder="e.g. 2024013417" />
+      <button type="submit">Login</button>
+      <p id="loginMessage" class="error"></p>
+    </form>
+  </main>
+
+  <script src="js/matric-numbers.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>
