@@ -107,3 +107,84 @@ main {
 .quick-link:hover {
   background: #334155;
 }
+
+/* === LOGIN PAGE STYLES === */
+body.login-body {
+  background: linear-gradient(135deg, #00264d, #006699);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-logo {
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #003366;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+form#loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+form#loginForm label {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  color: #003366;
+}
+
+form#loginForm input {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1.2rem;
+  transition: border 0.3s;
+}
+
+form#loginForm input:focus {
+  border-color: #006699;
+  outline: none;
+}
+
+form#loginForm button {
+  background-color: #004080;
+  color: #fff;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form#loginForm button:hover {
+  background-color: #0066cc;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  }
