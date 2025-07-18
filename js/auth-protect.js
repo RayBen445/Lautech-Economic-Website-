@@ -1,35 +1,41 @@
 // js/auth-protect.js
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ Check if user is authenticated
   const matric = localStorage.getItem("matric");
   const matricDisplay = document.getElementById("studentMatric");
 
   if (!matric) {
-    alert("You must log in first.");
+    alert("🚫 You must log in first.");
     window.location.href = "login.html";
-  } else {
-    if (matricDisplay) {
-      matricDisplay.textContent = matric;
-    }
+    return;
   }
 
-  // Profile picture upload
-  const upload = document.getElementById("uploadImage");
+  // ✅ Display matric number if element is present
+  if (matricDisplay) {
+    matricDisplay.textContent = matric;
+  }
+
+  // ✅ Profile image elements
+  const uploadInput = document.getElementById("uploadImage");
   const profileImage = document.getElementById("profileImage");
 
-  if (upload && profileImage) {
-    upload.addEventListener("change", () => {
-      const file = upload.files[0];
+  // ✅ Handle profile image upload
+  if (uploadInput && profileImage) {
+    uploadInput.addEventListener("change", () => {
+      const file = uploadInput.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-          localStorage.setItem("profileImage", reader.result);
-          profileImage.src = reader.result;
+          const base64Image = reader.result;
+          localStorage.setItem("profileImage", base64Image);
+          profileImage.src = base64Image;
         };
         reader.readAsDataURL(file);
       }
     });
 
+    // ✅ Load saved profile image on page load
     const savedImage = localStorage.getItem("profileImage");
     if (savedImage) {
       profileImage.src = savedImage;
@@ -37,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Logout function
+// 🔓 Logout function
 function logout() {
   localStorage.removeItem("matric");
   localStorage.removeItem("profileImage");
   window.location.href = "login.html";
-  }
+          }
