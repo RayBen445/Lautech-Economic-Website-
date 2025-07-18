@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Fallback Protection: Optional but not necessary if you're using localStorage -->
   <script>
-  if (sessionStorage.getItem("authenticated") !== "true") {
-    window.location.href = "login.html";
-  }
+    if (!localStorage.getItem("matric")) {
+      window.location.href = "login.html";
+    }
   </script>
+
   <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Load session protection & profile image handling -->
   <script src="js/auth-protect.js" defer></script>
 </head>
 <body>
@@ -21,14 +26,17 @@
   <main>
     <section class="dashboard">
       <h2>📋 Student Dashboard</h2>
-      <p><strong>Matric Number:</strong> <span id="studentMatric"></span></p>
+      
+      <!-- Matric Number Display -->
+      <p><strong>Matric Number:</strong> <span id="studentMatric">Loading...</span></p>
 
+      <!-- Profile Picture Upload -->
       <div class="profile-picture">
-        <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture"/>
+        <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture" />
         <input type="file" id="uploadImage" accept="image/*" />
       </div>
 
-      <p>Use the sidebar to explore your courses, resources, and profile.</p>
+      <p>Use the sidebar to explore your courses, resources, and academic records.</p>
     </section>
   </main>
 </body>
