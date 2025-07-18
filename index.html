@@ -2,42 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAUTECH Department of Economics</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo"/>
-    <h1>Department of Economics, LAUTECH</h1>
+  <header class="site-header">
+    <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
+    <h1>Department of Economics</h1>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </header>
 
-  <aside id="sidebar">
-    <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="staff.html">👨‍🏫 Staff</a></li>
-      <li><a href="courses.html">📘 Courses</a></li>
-      <li><a href="#">🗂 Resources</a></li>
-      <li><a href="#">🖼 Gallery</a></li>
-      <li><a href="#">📬 Contact</a></li>
-    </ul>
+  <aside id="sidebar" class="sidebar">
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="staff.html">👨‍🏫 Staff</a></li>
+        <li><a href="courses.html">📘 Courses</a></li>
+        <li><a href="resources.html">🗂 Resources</a></li>
+        <li><a href="gallery.html">🖼 Gallery</a></li>
+        <li><a href="contact.html">📬 Contact</a></li>
+      </ul>
+    </nav>
   </aside>
 
-  <main>
-    <section class="carousel">
-      <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238" class="slide active" alt="Campus View" />
-      <img src="https://images.unsplash.com/photo-1584697964192-8a7fb1d4e6da" class="slide" alt="Lecture Hall" />
-      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1" class="slide" alt="Library" />
+  <main class="homepage">
+    <section class="hero">
+      <h2>Welcome to</h2>
+      <h1>Department of Economics</h1>
+      <p>Ladoke Akintola University of Technology (LAUTECH)</p>
     </section>
     <section class="quick-links">
-      <a href="staff.html" class="quick-link">👨‍🏫 Staff</a>
-      <a href="courses.html" class="quick-link">📘 Courses</a>
-      <a href="#" class="quick-link">🗂 Resources</a>
-      <a href="#" class="quick-link">🖼 Gallery</a>
-      <a href="#" class="quick-link">📬 Contact</a>
+      <a href="staff.html" class="card">👨‍🏫 Staff</a>
+      <a href="courses.html" class="card">📘 Courses</a>
+      <a href="resources.html" class="card">🗂 Resources</a>
+      <a href="gallery.html" class="card">🖼 Gallery</a>
+      <a href="contact.html" class="card">📬 Contact</a>
     </section>
   </main>
+
+  <footer>
+    <p>&copy; 2025 LAUTECH Economics Dept. All Rights Reserved.</p>
+  </footer>
 </body>
-</html>
+  </html>
