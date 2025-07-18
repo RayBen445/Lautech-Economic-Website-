@@ -1,6 +1,6 @@
 // js/auth.js
 
-// ✅ Allowed matric numbers (can be expanded or moved to a database in future)
+// ✅ Allowed matric numbers (add/remove as needed)
 const allowedMatricNumbers = [
   "2024013417", "2023011476", "2024003355", "2024003476", "2024003486",
   "2024003513", "2024003516", "2024003580", "2024003583", "2024003607",
@@ -49,7 +49,7 @@ const allowedMatricNumbers = [
   "2024013035", "2024013060", "2024013164", "2024013180"
 ];
 
-// 📌 Run on form submit
+// 🔐 Auth logic on login form submit
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   if (!form) return;
@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const input = document.getElementById("matric");
-    const error = document.getElementById("errorMsg");
+    const input = document.getElementById("matricNumber");
+    const error = document.getElementById("loginError");
     const matricNumber = input.value.trim();
 
     if (allowedMatricNumbers.includes(matricNumber)) {
