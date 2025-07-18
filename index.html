@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAUTECH Department of Economics</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/auth.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <script src="js/auth-protect.js" defer></script> <!-- Redirects if not logged in -->
+  <script src="js/auth.js" defer></script>         <!-- Handles login/session -->
+  <script src="js/main.js" defer></script>         <!-- Handles UI -->
 </head>
 <body>
   <header>
@@ -24,6 +24,7 @@
       <li><a href="resources.html">🗂 Resources</a></li>
       <li><a href="gallery.html">🖼 Gallery</a></li>
       <li><a href="contact.html">📬 Contact</a></li>
+      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
     </ul>
   </aside>
 
@@ -43,4 +44,4 @@
     </section>
   </main>
 </body>
-</html>
+      </html>
