@@ -3,15 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home | LAUTECH Economics</title>
+  <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth-protect.js" defer></script>
 </head>
 <body>
-  <main>
-    <h1>Welcome to the LAUTECH Department of Economics</h1>
-    <p>This page is protected and only accessible to students with valid Matric Numbers.</p>
-  </main>
+  <header>
+    <h1>🎓 Welcome to LAUTECH Economics Department</h1>
+    <button onclick="logout()">🔓 Logout</button>
+  </header>
 
-  <script src="js/auth.js"></script>
+  <main>
+    <section class="dashboard">
+      <h2>📋 Student Dashboard</h2>
+      <p><strong>Matric Number:</strong> <span id="studentMatric"></span></p>
+
+      <div class="profile-picture">
+        <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture"/>
+        <input type="file" id="uploadImage" accept="image/*" />
+      </div>
+
+      <p>Use the sidebar to explore your courses, resources, and profile.</p>
+    </section>
+  </main>
 </body>
 </html>
