@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LAUTECH Department of Economics</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/main.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header class="site-header">
-    <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
-    <h1>Department of Economics</h1>
+    <div class="header-left">
+      <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
+      <h1>Dept. of Economics</h1>
+    </div>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </header>
 
@@ -28,23 +30,30 @@
     </nav>
   </aside>
 
-  <main class="homepage">
+  <main class="main-content">
     <section class="hero">
       <h2>Welcome to</h2>
       <h1>Department of Economics</h1>
       <p>Ladoke Akintola University of Technology (LAUTECH)</p>
     </section>
+
+    <section class="carousel">
+      <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238" class="slide active" alt="Campus View" />
+      <img src="https://images.unsplash.com/photo-1584697964192-8a7fb1d4e6da" class="slide" alt="Lecture Hall" />
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1" class="slide" alt="Library" />
+    </section>
+
     <section class="quick-links">
-      <a href="staff.html" class="card">👨‍🏫 Staff</a>
-      <a href="courses.html" class="card">📘 Courses</a>
-      <a href="resources.html" class="card">🗂 Resources</a>
-      <a href="gallery.html" class="card">🖼 Gallery</a>
-      <a href="contact.html" class="card">📬 Contact</a>
+      <a href="staff.html" class="quick-link">👨‍🏫 Staff</a>
+      <a href="courses.html" class="quick-link">📘 Courses</a>
+      <a href="resources.html" class="quick-link">🗂 Resources</a>
+      <a href="gallery.html" class="quick-link">🖼 Gallery</a>
+      <a href="contact.html" class="quick-link">📬 Contact</a>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 LAUTECH Economics Dept. All Rights Reserved.</p>
+  <footer class="site-footer">
+    <p>&copy; 2025 LAUTECH Department of Economics. All rights reserved.</p>
   </footer>
 </body>
   </html>
