@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script>
+  if (sessionStorage.getItem("authenticated") !== "true") {
+    window.location.href = "login.html";
+  }
+  </script>
   <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/auth-protect.js" defer></script>
