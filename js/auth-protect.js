@@ -1,8 +1,8 @@
-// js/auth-protect.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const matric = localStorage.getItem("matric");
+  const fullName = localStorage.getItem("fullName"); // Get saved full name
   const matricDisplay = document.getElementById("studentMatric");
+  const nameDisplay = document.getElementById("studentName");
 
   // 🚫 Redirect if not logged in
   if (!matric) {
@@ -16,7 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     matricDisplay.textContent = matric;
   }
 
-  // 📸 Profile Picture Upload Logic
+  // ✅ Show full name
+  if (nameDisplay && fullName) {
+    nameDisplay.textContent = fullName;
+  }
+
+  // 📸 Profile Picture Upload & Restore
   const uploadInput = document.getElementById("uploadImage");
   const profileImage = document.getElementById("profileImage");
 
@@ -44,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 🔓 Logout Function
 function logout() {
   localStorage.removeItem("matric");
+  localStorage.removeItem("fullName");
   localStorage.removeItem("profileImage");
   window.location.href = "login.html";
 }
