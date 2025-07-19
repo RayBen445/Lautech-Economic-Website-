@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
-  
+
   <!-- Redirect to login if not authenticated -->
   <script>
     if (!localStorage.getItem("matric")) {
@@ -14,14 +14,43 @@
     }
   </script>
 
-  <!-- Script for session protection & image handling -->
+  <!-- Scripts -->
   <script src="js/auth-protect.js" defer></script>
   <script src="js/main.js" defer></script>
+
+  <style>
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #profileImage {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+
+    #uploadImage {
+      margin-top: 8px;
+    }
+
+    .profile-wrapper {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
     <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
-    <h1>🎓 Welcome, <span id="studentMatric">Student</span></h1>
+    
+    <div class="header-info">
+      <h1>🎓 Welcome, <span id="studentMatric">Student</span></h1>
+      <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture" />
+    </div>
+
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </header>
 
@@ -39,10 +68,9 @@
   <main>
     <section class="dashboard">
       <h2>📋 Student Dashboard</h2>
-      <p><strong>Matric Number:</strong> <span id="studentMatric">Loading...</span></p>
 
-      <div class="profile-picture">
-        <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture" />
+      <div class="profile-wrapper">
+        <label for="uploadImage">Change Profile Image:</label>
         <input type="file" id="uploadImage" accept="image/*" />
       </div>
 
@@ -50,4 +78,4 @@
     </section>
   </main>
 </body>
-          </html>
+  </html>
