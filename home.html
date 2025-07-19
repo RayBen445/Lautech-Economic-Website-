@@ -7,7 +7,7 @@
   <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Redirect to login if not authenticated -->
+  <!-- Redirect if not authenticated -->
   <script>
     if (!localStorage.getItem("matric")) {
       window.location.href = "login.html";
@@ -69,9 +69,9 @@
 <body>
   <header>
     <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
-    
+
     <div class="header-info">
-      <h1>🎓 Welcome, <span id="studentMatric">Student</span></h1>
+      <h1>🎓 Welcome, <span id="studentName">Student</span> (<span id="studentMatric">Matric</span>)</h1>
       <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture" />
     </div>
 
@@ -102,6 +102,7 @@
           <input type="file" id="uploadImage" accept="image/*" />
         </div>
         <div class="profile-details">
+          <p><strong>Full Name:</strong> <span id="studentNameProfile">Loading...</span></p>
           <p><strong>Matric Number:</strong> <span id="studentMatricProfile">Loading...</span></p>
           <p><strong>Email:</strong> <span id="studentEmail">student@example.com</span></p>
           <p><strong>Last Login:</strong> <span id="lastLogin">Just now</span></p>
@@ -113,26 +114,29 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const matric = localStorage.getItem("matric");
+      const fullName = localStorage.getItem("fullName") || "Student";
       const savedImage = localStorage.getItem("profileImage");
+      const email = localStorage.getItem("email") || "student@example.com";
 
-      document.getElementById("studentMatric").textContent = matric || "Student";
-      document.getElementById("studentMatricProfile").textContent = matric || "Student";
+      // Top header info
+      document.getElementById("studentMatric").textContent = matric || "N/A";
+      document.getElementById("studentName").textContent = fullName;
 
+      // Profile section
+      document.getElementById("studentMatricProfile").textContent = matric || "N/A";
+      document.getElementById("studentNameProfile").textContent = fullName;
+      document.getElementById("studentEmail").textContent = email;
+
+      // Last login timestamp
+      document.getElementById("lastLogin").textContent = new Date().toLocaleString();
+
+      // Load profile picture
       if (savedImage) {
         document.getElementById("profileImage").src = savedImage;
         document.getElementById("largeProfileImage").src = savedImage;
       }
 
-      // Last login
-      const now = new Date();
-      document.getElementById("lastLogin").textContent = now.toLocaleString();
-
-      // Optional email logic
-      const email = localStorage.getItem("email");
-      if (email) {
-        document.getElementById("studentEmail").textContent = email;
-      }
-
+      // Handle profile image upload
       const uploadInput = document.getElementById("uploadImage");
       uploadInput.addEventListener("change", () => {
         const file = uploadInput.files[0];
@@ -150,4 +154,4 @@
     });
   </script>
 </body>
-    </html>
+  </html>
