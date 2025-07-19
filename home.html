@@ -4,33 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- Fallback Protection: Optional but not necessary if you're using localStorage -->
+  <title>Student Dashboard | LAUTECH Economics</title>
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- Redirect to login if not authenticated -->
   <script>
     if (!localStorage.getItem("matric")) {
       window.location.href = "login.html";
     }
   </script>
 
-  <title>Student Dashboard | LAUTECH Economics</title>
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Load session protection & profile image handling -->
+  <!-- Script for session protection & image handling -->
   <script src="js/auth-protect.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>🎓 Welcome to LAUTECH Economics Department</h1>
-    <button onclick="logout()">🔓 Logout</button>
+    <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
+    <h1>🎓 Welcome, <span id="studentMatric">Student</span></h1>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </header>
+
+  <aside id="sidebar">
+    <ul>
+      <li><a href="home.html">🏠 Dashboard</a></li>
+      <li><a href="courses.html">📘 Courses</a></li>
+      <li><a href="resources.html">🗂 Resources</a></li>
+      <li><a href="contact.html">📬 Contact</a></li>
+      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
+    </ul>
+  </aside>
 
   <main>
     <section class="dashboard">
       <h2>📋 Student Dashboard</h2>
-      
-      <!-- Matric Number Display -->
       <p><strong>Matric Number:</strong> <span id="studentMatric">Loading...</span></p>
 
-      <!-- Profile Picture Upload -->
       <div class="profile-picture">
         <img id="profileImage" src="assets/default-avatar.png" alt="Profile Picture" />
         <input type="file" id="uploadImage" accept="image/*" />
@@ -40,4 +49,4 @@
     </section>
   </main>
 </body>
-</html>
+          </html>
