@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Student Dashboard | LAUTECH Economics</title>
   <link rel="stylesheet" href="css/style.css" />
 
@@ -64,21 +63,20 @@
       border: 3px solid #999;
       margin-bottom: 10px;
     }
+
+    footer.site-footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f0f0f0;
+      color: #333;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
   </style>
 </head>
-  <footer style="text-align: center; padding: 1rem; background: #f0f0f0; color: #333; font-size: 0.9rem; margin-top: 2rem;">
-  &copy; 2025 All rights reserved — Property of LAUTECH Economics Department, Class 29
-  </footer>
-  
+
 <body>
-  </main>
-
-  <footer style="text-align: center; padding: 1rem; background: #f0f0f0; color: #333; font-size: 0.9rem; margin-top: 2rem;">
-    &copy; 2025 All rights reserved — Property of LAUTECH Economics Department, Class 29
-  </footer>
-
-</body>
-</html>
   <header>
     <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="logo" />
 
@@ -123,47 +121,10 @@
     </section>
   </main>
 
+  <footer class="site-footer">
+    &copy; 2025 All rights reserved — Property of LAUTECH Economics Department, Class 29
+  </footer>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const matric = localStorage.getItem("matric");
-      const fullName = localStorage.getItem("fullName") || "Student";
-      const savedImage = localStorage.getItem("profileImage");
-      const email = localStorage.getItem("email") || "student@example.com";
-
-      // Top header info
-      document.getElementById("studentMatric").textContent = matric || "N/A";
-      document.getElementById("studentName").textContent = fullName;
-
-      // Profile section
-      document.getElementById("studentMatricProfile").textContent = matric || "N/A";
-      document.getElementById("studentNameProfile").textContent = fullName;
-      document.getElementById("studentEmail").textContent = email;
-
-      // Last login timestamp
-      document.getElementById("lastLogin").textContent = new Date().toLocaleString();
-
-      // Load profile picture
-      if (savedImage) {
-        document.getElementById("profileImage").src = savedImage;
-        document.getElementById("largeProfileImage").src = savedImage;
-      }
-
-      // Handle profile image upload
-      const uploadInput = document.getElementById("uploadImage");
-      uploadInput.addEventListener("change", () => {
-        const file = uploadInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const base64 = reader.result;
-            localStorage.setItem("profileImage", base64);
-            document.getElementById("profileImage").src = base64;
-            document.getElementById("largeProfileImage").src = base64;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-    });
-  </script>
-</body>
-  </html>
+      const matric = localStorage.getItem("
