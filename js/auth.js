@@ -1,5 +1,3 @@
-// js/auth.js
-
 // ✅ Allowed Matric Numbers
 const allowedMatricNumbers = [
   "2024013417", "2023011476", "2024003355", "2024003476", "2024003486", "2024003513",
@@ -42,48 +40,62 @@ const allowedMatricNumbers = [
   "2024013164", "2024013180"
 ];
 
-// ✅ Login Logic
+// ✅ Auth Logic (Registration + Login Combined)
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("loginForm");
-  if (!form) return;
+  const registerForm = document.getElementById("registerForm");
+  const loginForm = document.getElementById("loginForm");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  if (registerForm) {
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const matricInput = document.getElementById("matricNumber");
-    const fullNameInput = document.getElementById("fullName");
-    const emailInput = document.getElementById("email");
-    const error = document.getElementById("loginError");
+      const fullName = document.getElementById("registerFullName").value.trim();
+      const matric = document.getElementById("registerMatric").value.trim();
+      const email = document.getElementById("registerEmail").value.trim();
+      const error = document.getElementById("registerError");
 
-    const matricNumber = matricInput.value.trim();
-    const fullName = fullNameInput.value.trim();
-    const email = emailInput.value.trim();
+      const fullNameValid = /^[A-Za-z]+ [A-Za-z]+( [A-Za-z]+)?$/.test(fullName);
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Validate full name
-    const fullNameValid = /^[A-Za-z]+ [A-Za-z]+( [A-Za-z]+)?$/.test(fullName);
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!fullNameValid) {
+        error.textContent = "❌ Full name must be: Surname Firstname Othername";
+        return;
+      }
 
-    if (!fullNameValid) {
-      error.textContent = "❌ Enter full name as: Surname Firstname Othername";
-      fullNameInput.classList.add("error");
-      return;
-    }
+      if (!emailValid) {
+        error.textContent = "❌ Enter a valid email address";
+        return;
+      }
 
-    if (!emailValid) {
-      error.textContent = "❌ Enter a valid email address";
-      emailInput.classList.add("error");
-      return;
-    }
+      if (!allowedMatricNumbers.includes(matric)) {
+        error.textContent = "❌ Your Matric number is not authorized";
+        return;
+      }
 
-    if (allowedMatricNumbers.includes(matricNumber)) {
-      // Save to localStorage
-      localStorage.setItem("matric", matricNumber);
+      // Save data
       localStorage.setItem("fullname", fullName);
+      localStorage.setItem("matric", matric);
       localStorage.setItem("email", email);
+
+      // Redirect to dashboard
       window.location.href = "home.html";
-    } else {
-      error.textContent = "❌ Invalid Matric Number. Try again.";
-      matricInput.classList.add("error");
-    }
-  });
+    });
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const matric = document.getElementById("loginMatric").value.trim();
+      const error = document.getElementById("loginError");
+
+      const savedMatric = localStorage.getItem("matric");
+
+      if (matric === savedMatric) {
+        window.location.href = "home.html";
+      } else {
+        error.textContent = "❌ Matric not registered. Please register first.";
+      }
+    });
+  }
 });
