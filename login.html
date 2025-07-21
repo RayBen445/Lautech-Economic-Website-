@@ -13,7 +13,7 @@
     <img src="https://upload.wikimedia.org/wikipedia/en/9/94/LAUTECH_logo.png" alt="LAUTECH Logo" class="login-logo" />
     <h2>Department of Economics<br>Student Login</h2>
 
-    <form id="loginForm">
+    <form id="loginForm" novalidate>
       <!-- Full Name Input -->
       <label for="fullName">Full Name</label>
       <input
@@ -24,6 +24,8 @@
         placeholder="e.g. Smith John David"
         pattern="^[A-Za-z]+ [A-Za-z]+( [A-Za-z]+)?$"
         title="Enter full name as: Surname Firstname Othername"
+        autocomplete="off"
+        autocapitalize="words"
       />
 
       <!-- Matric Number Input -->
@@ -34,6 +36,7 @@
         name="matricNumber"
         required
         placeholder="e.g. 2024001234"
+        autocomplete="off"
       />
 
       <button type="submit">Login</button>
@@ -41,7 +44,7 @@
     </form>
 
     <p style="font-size: small; margin-top: 10px;">
-      This login is for authenticated LAUTECH Economic students Class29 only. No sensitive data is collected.
+      This login is for authenticated LAUTECH Economics Class29 students only. No sensitive data is collected.
     </p>
   </div>
 </body>
