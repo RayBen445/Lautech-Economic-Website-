@@ -189,12 +189,16 @@ form#loginForm input {
   border: 1px solid #ccc;
   border-radius: 6px;
   margin-bottom: 1.2rem;
-  transition: border 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 form#loginForm input:focus {
   border-color: #006699;
   outline: none;
+}
+
+form#loginForm input.error {
+  border-color: red !important;
 }
 
 form#loginForm button {
@@ -215,41 +219,8 @@ form#loginForm button:hover {
 .error-msg {
   color: red;
   font-size: 0.9rem;
-  margin-top: -1rem;
+  margin-top: 0.5rem;
 }
-
-form#registerForm label {
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 0.4rem;
-  display: block;
-}
-
-form#registerForm input {
-  padding: 0.6rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 1.2rem;
-  width: 100%;
-}
-
-form#registerForm button {
-  background-color: #004080;
-  color: #fff;
-  padding: 0.7rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.error-msg {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-    }
-  
 
 /* === FOOTER (Sticky Bottom) === */
 footer.site-footer {
@@ -260,4 +231,22 @@ footer.site-footer {
   font-size: 0.9rem;
   border-top: 1px solid #ccc;
   margin-top: auto;
+}
+
+/* === RESPONSIVE LOGIN (optional) === */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .login-container h2 {
+    font-size: 1.1rem;
+  }
+
+  form#loginForm input,
+  form#loginForm button {
+    font-size: 0.95rem;
+    padding: 0.5rem;
+  }
 }
