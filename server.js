@@ -5,12 +5,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 
-// 🛡️ Auth middleware
+// 🔐 Middleware
 const authProtect = require('./middleware/auth-protect');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 🔧 Middleware setup
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -21,26 +22,26 @@ if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath);
 }
 
-// 🧠 In-memory store (for testing only)
-const users = {};
-
-// 🔧 Multer config for profile image
+// 🔧 Multer setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads/'),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
 const upload = multer({ storage });
 
-// ✅ Registration/Login Route (combined)
+// 🧠 In-memory user store
+const users = {};
+
+// ✅ Login / Register endpoint
 app.post('/api/login', upload.single('profilePic'), (req, res) => {
   const { matric, fullName, email } = req.body;
   const image = req.file ? `/uploads/${req.file.filename}` : "";
 
   if (!matric || !fullName) {
-    return res.status(400).json({ message: "Matric number and full name are required" });
+    return res.status(400).json({ message: "❌ Matric number and full name are required" });
   }
 
-  // Save or update user
+  // Save user
   users[matric] = {
     fullName,
     email: email || "",
@@ -53,9 +54,9 @@ app.post('/api/login', upload.single('profilePic'), (req, res) => {
   });
 });
 
-// 🔐 Protected route: Fetch user info
+// 👤 Get user by matric number (protected)
 app.get('/api/user/:matric', authProtect, (req, res) => {
-  const { matric } = req.params;
+  const matric = req.params.matric;
 
   if (users[matric]) {
     return res.json(users[matric]);
@@ -64,6 +65,7 @@ app.get('/api/user/:matric', authProtect, (req, res) => {
   }
 });
 
+// 🟢 Server Start
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
