@@ -1,5 +1,5 @@
-// ✅ Allowed Matric Numbers
-const allowedMatricNumbers = [
+// ✅ Authorized Matric Numbers (LAUTECH ECONOMICS CLASS 29)
+const allowedMatricNumbers = new Set([
   "2024013417", "2023011476", "2024003355", "2024003476", "2024003486", "2024003513",
   "2024003516", "2024003580", "2024003583", "2024003607", "2024013214", "2024003667",
   "2024003692", "2024003712", "2024003741", "2024003770", "2024003869", "2024003999",
@@ -38,15 +38,15 @@ const allowedMatricNumbers = [
   "2024012493", "2024012547", "2024012628", "2024012666", "2024012674", "2024012792",
   "2024012879", "2024012918", "2024012939", "2024013017", "2024013035", "2024013060",
   "2024013164", "2024013180"
-];
+]);
 
-// ✅ Auth Logic (Registration + Login Combined)
+// ✅ Auth Logic
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("registerForm");
   const loginForm = document.getElementById("loginForm");
 
   if (registerForm) {
-    registerForm.addEventListener("submit", (e) => {
+    registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const fullName = document.getElementById("registerFullName").value.trim();
@@ -67,34 +67,54 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (!allowedMatricNumbers.includes(matric)) {
+      if (!allowedMatricNumbers.has(matric)) {
         error.textContent = "❌ Your Matric number is not authorized";
         return;
       }
 
-      // Save data
-      localStorage.setItem("fullname", fullName);
-      localStorage.setItem("matric", matric);
-      localStorage.setItem("email", email);
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fullName, matric, email })
+        });
 
-      // Redirect to dashboard
-      window.location.href = "home.html";
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Something went wrong");
+
+        // Save user info locally
+        localStorage.setItem("fullname", data.user.fullName);
+        localStorage.setItem("matric", matric);
+        localStorage.setItem("email", data.user.email);
+        localStorage.setItem("profilePic", data.user.image || "");
+
+        window.location.href = "home.html";
+      } catch (err) {
+        error.textContent = `❌ ${err.message}`;
+      }
     });
   }
 
   if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const matric = document.getElementById("loginMatric").value.trim();
       const error = document.getElementById("loginError");
 
-      const savedMatric = localStorage.getItem("matric");
+      try {
+        const res = await fetch(`/api/user/${matric}`);
+        const data = await res.json();
 
-      if (matric === savedMatric) {
+        if (!res.ok) throw new Error(data.message || "Matric not found");
+
+        localStorage.setItem("fullname", data.fullName);
+        localStorage.setItem("matric", matric);
+        localStorage.setItem("email", data.email || "");
+        localStorage.setItem("profilePic", data.image || "");
+
         window.location.href = "home.html";
-      } else {
-        error.textContent = "❌ Matric not registered. Please register first.";
+      } catch (err) {
+        error.textContent = `❌ ${err.message}`;
       }
     });
   }
