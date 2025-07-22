@@ -1,11 +1,12 @@
-
-
-
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
+
+// 🛡️ Auth middleware
+const authProtect = require('./middleware/auth-protect');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,24 +15,23 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// 🧠 In-memory store (for testing only)
-const users = {};
-
 // 📁 Ensure uploads folder exists
-const fs = require('fs');
 const uploadPath = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath);
 }
 
-// 🔧 Multer config for image upload
+// 🧠 In-memory store (for testing only)
+const users = {};
+
+// 🔧 Multer config for profile image
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, 'uploads/'),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
 const upload = multer({ storage });
 
-// ✅ Login/Register (acts as one)
+// ✅ Registration/Login Route (combined)
 app.post('/api/login', upload.single('profilePic'), (req, res) => {
   const { matric, fullName, email } = req.body;
   const image = req.file ? `/uploads/${req.file.filename}` : "";
@@ -53,9 +53,9 @@ app.post('/api/login', upload.single('profilePic'), (req, res) => {
   });
 });
 
-// 👤 Fetch user info
-app.get('/api/user/:matric', (req, res) => {
-  const matric = req.params.matric;
+// 🔐 Protected route: Fetch user info
+app.get('/api/user/:matric', authProtect, (req, res) => {
+  const { matric } = req.params;
 
   if (users[matric]) {
     return res.json(users[matric]);
