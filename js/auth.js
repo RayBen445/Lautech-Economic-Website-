@@ -40,7 +40,8 @@ const allowedMatricNumbers = new Set([
   "2024013164", "2024013180"
 ]);
 
-// ✅ Auth Logic
+const BACKEND_URL = "https://lautech-economic-website-vb9q.onrender.com";
+
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("registerForm");
   const loginForm = document.getElementById("loginForm");
@@ -48,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const fullName = document.getElementById("registerFullName").value.trim();
       const matric = document.getElementById("registerMatric").value.trim();
       const email = document.getElementById("registerEmail").value.trim();
@@ -57,32 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const fullNameValid = /^[A-Za-z]+ [A-Za-z]+( [A-Za-z]+)?$/.test(fullName);
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      if (!fullNameValid) {
-        error.textContent = "❌ Full name must be: Surname Firstname Othername";
-        return;
-      }
-
-      if (!emailValid) {
-        error.textContent = "❌ Enter a valid email address";
-        return;
-      }
-
-      if (!allowedMatricNumbers.has(matric)) {
-        error.textContent = "❌ Your Matric number is not authorized";
-        return;
-      }
+      if (!fullNameValid) return error.textContent = "❌ Full name must be: Surname Firstname Othername";
+      if (!emailValid) return error.textContent = "❌ Enter a valid email address";
+      if (!allowedMatricNumbers.has(matric)) return error.textContent = "❌ Your Matric number is not authorized";
 
       try {
-        const response = await fetch("/api/login", {
+        const res = await fetch(`${BACKEND_URL}/api/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ fullName, matric, email })
         });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || "Something went wrong");
 
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Something went wrong");
-
-        // Save user info locally
         localStorage.setItem("fullname", data.user.fullName);
         localStorage.setItem("matric", matric);
         localStorage.setItem("email", data.user.email);
@@ -102,9 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const error = document.getElementById("loginError");
 
       try {
-        const res = await fetch(`/api/user/${matric}`);
+        const res = await fetch(`${BACKEND_URL}/api/user/${matric}`);
         const data = await res.json();
-
         if (!res.ok) throw new Error(data.message || "Matric not found");
 
         localStorage.setItem("fullname", data.fullName);
